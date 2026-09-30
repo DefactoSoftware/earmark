@@ -6,14 +6,14 @@ defmodule Earmark.Mixfile do
   @url "https://github.com/pragdave/earmark"
 
   @deps [
-    {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
+    {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
     {:benchfella, "~> 0.3.0", only: [:dev]},
-    {:earmark_ast_dsl, "~> 0.3.6", only: [:dev, :test]},
-    {:excoveralls, "~> 0.16.0", only: [:test]},
-    {:ex_doc, "~> 0.38.2", only: [:dev]},
+    {:earmark_ast_dsl, "~> 0.3.7", only: [:dev, :test]},
+    {:excoveralls, "~> 0.18.5", only: [:test]},
+    {:ex_doc, "~> 0.40.4", only: [:dev]},
     # {:extractly, "~> 0.5.0", git: "https://github.com/RobertDober/extractly.git", tag: "v0.5.0-pre1", only: [:dev]},
     {:extractly, "~> 0.5.3", only: [:dev]},
-    {:floki, "~> 0.21", only: [:dev, :test]},
+    {:floki, "~> 0.37.1", only: [:dev, :test]},
     {:traverse, "~> 1.0.1", only: [:dev, :test]}
   ]
 

@@ -613,7 +613,7 @@ defmodule Earmark.Transform do
 
   defp _maybe_remove_paras(ast, options)
 
-  defp _maybe_remove_paras(ast, %Options{inner_html: true}) do
+  defp _maybe_remove_paras(ast, %{inner_html: true}) do
     Enum.map(ast, &_remove_para/1)
   end
 
