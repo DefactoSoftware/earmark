@@ -484,7 +484,24 @@ defmodule Earmark.Transform do
   defp _make_att1(name_value_pair, tag)
 
   defp _make_att1({name, value}, _) do
-    [" ", name, "=\"", value, "\""]
+    [" ", name, "=\"", _escape_attribute_value(value), "\""]
+  end
+
+  # Attribute values are emitted between double quotes, so a value containing `"`
+  # (e.g. a link destination such as `[x](http://a" onmouseover="...)`) would
+  # otherwise close the attribute and inject arbitrary new ones (CVE-2026-48591).
+  #
+  # We use the same entity-aware escaping the parser applies to `alt` text:
+  # `<`, `>`, `"` and `'` are always escaped, and `&` is escaped unless it already
+  # starts an entity, so values the parser has escaped already are not double
+  # escaped. This is independent of the `escape:` option, which only concerns
+  # HTML inside text content.
+  defp _escape_attribute_value(value) when is_binary(value) do
+    Earmark.Parser.Helpers.escape(value)
+  end
+
+  defp _escape_attribute_value(value) do
+    value |> to_string() |> _escape_attribute_value()
   end
 
   defp make_indent(options, level)
